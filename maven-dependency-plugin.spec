@@ -4,7 +4,7 @@
 
 Name:           %{?scl_prefix}%{pkg_name}
 Version:        2.7
-Release:        3.12%{?dist}
+Release:        3.13%{?dist}
 Summary:        Plugin to manipulate, copy and unpack local and remote artifacts
 
 License:        ASL 2.0
@@ -21,26 +21,26 @@ Patch4:         %{pkg_name}-removed-exception-catching.patch
 
 BuildArch:      noarch
 
-BuildRequires: maven30-plexus-utils
+BuildRequires: %{?scl_prefix}plexus-utils
 BuildRequires: %{?scl_prefix_java_common}ant
 BuildRequires: %{?scl_prefix_java_common}apache-commons-io
 BuildRequires: %{?scl_prefix_java_common}maven-local
-BuildRequires: maven30-maven-install-plugin
-BuildRequires: maven30-maven-compiler-plugin
-BuildRequires: maven30-maven-dependency-tree
-BuildRequires: maven30-maven-plugin-plugin
-BuildRequires: maven30-maven-plugin-annotations
-BuildRequires: maven30-maven-resources-plugin
-BuildRequires: maven30-maven-surefire-plugin
-BuildRequires: maven30-maven-surefire-provider-junit
-BuildRequires: maven30-maven-jar-plugin
-BuildRequires: maven30-maven-javadoc-plugin
-BuildRequires: maven30-maven-dependency-analyzer
-BuildRequires: maven30-maven-common-artifact-filters
-BuildRequires: maven30-maven-file-management
-BuildRequires: maven30-maven-project
-BuildRequires: maven30-maven-artifact-manager
-BuildRequires: maven30-maven-plugin-testing-tools
+BuildRequires: %{?scl_prefix}maven-install-plugin
+BuildRequires: %{?scl_prefix}maven-compiler-plugin
+BuildRequires: %{?scl_prefix}maven-dependency-tree
+BuildRequires: %{?scl_prefix}maven-plugin-plugin
+BuildRequires: %{?scl_prefix}maven-plugin-annotations
+BuildRequires: %{?scl_prefix}maven-resources-plugin
+BuildRequires: %{?scl_prefix}maven-surefire-plugin
+BuildRequires: %{?scl_prefix}maven-surefire-provider-junit
+BuildRequires: %{?scl_prefix}maven-jar-plugin
+BuildRequires: %{?scl_prefix}maven-javadoc-plugin
+BuildRequires: %{?scl_prefix}maven-dependency-analyzer
+BuildRequires: %{?scl_prefix}maven-common-artifact-filters
+BuildRequires: %{?scl_prefix}maven-file-management
+BuildRequires: %{?scl_prefix}maven-project
+BuildRequires: %{?scl_prefix}maven-artifact-manager
+BuildRequires: %{?scl_prefix}maven-plugin-testing-tools
 
 
 %description
@@ -58,7 +58,7 @@ Summary:        API documentation for %{pkg_name}
 
 %prep
 %setup -q -n %{pkg_name}-%{version}
-%{?scl:scl enable maven30 %{scl} - <<"EOF"}
+%{?scl:scl enable %{scl} - <<"EOF"}
 set -e -x
 
 %patch0 -p1
@@ -73,14 +73,14 @@ sed -i \
 
 
 %build
-%{?scl:scl enable maven30 %{scl} - <<"EOF"}
+%{?scl:scl enable %{scl} - <<"EOF"}
 set -e -x
 # Tests fail to compile because they use unsupported legacy API.
 %mvn_build -f
 %{?scl:EOF}
 
 %install
-%{?scl:scl enable maven30 %{scl} - <<"EOF"}
+%{?scl:scl enable %{scl} - <<"EOF"}
 set -e -x
 %mvn_install
 %{?scl:EOF}
@@ -94,6 +94,9 @@ set -e -x
 %doc LICENSE NOTICE
 
 %changelog
+* Mon Jan 11 2016 Michal Srb <msrb@redhat.com> - 2.7-3.13
+- maven33 rebuild #2
+
 * Sat Jan 09 2016 Michal Srb <msrb@redhat.com> - 2.7-3.12
 - maven33 rebuild
 

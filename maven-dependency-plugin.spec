@@ -4,7 +4,7 @@
 
 Name:           %{?scl_prefix}%{pkg_name}
 Version:        2.7
-Release:        3.13%{?dist}
+Release:        3.14%{?dist}
 Summary:        Plugin to manipulate, copy and unpack local and remote artifacts
 
 License:        ASL 2.0
@@ -24,7 +24,7 @@ BuildArch:      noarch
 BuildRequires: %{?scl_prefix}plexus-utils
 BuildRequires: %{?scl_prefix_java_common}ant
 BuildRequires: %{?scl_prefix_java_common}apache-commons-io
-BuildRequires: %{?scl_prefix_java_common}maven-local
+BuildRequires: %{?scl_prefix}maven-local
 BuildRequires: %{?scl_prefix}maven-install-plugin
 BuildRequires: %{?scl_prefix}maven-compiler-plugin
 BuildRequires: %{?scl_prefix}maven-dependency-tree
@@ -94,6 +94,9 @@ set -e -x
 %doc LICENSE NOTICE
 
 %changelog
+* Mon Feb 08 2016 Michal Srb <msrb@redhat.com> - 2.7-3.14
+- Fix BR on maven-local & co.
+
 * Mon Jan 11 2016 Michal Srb <msrb@redhat.com> - 2.7-3.13
 - maven33 rebuild #2
 
